@@ -1,0 +1,9 @@
+export '../views/home/home_screen.dart';
+export '../views/product/add_product_screen.dart';
+export '../views/product/product_show.dart';
+export '../views/purchase/add_purchase_screen.dart';
+export '../views/purchase/purchase_list_screen.dart';
+export '../views/raw/raw_list_screen.dart';
+export '../views/raw/raw_material_screen.dart';
+export '../views/sale/add_salle_op.dart';
+export '../views/sale/sale_screen.dart';
