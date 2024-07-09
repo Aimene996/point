@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:testpos/views/debt/add_debt_screen.dart';
+import 'package:testpos/views/debt/debt_list.dart';
 import 'package:testpos/views/summary_screen.dart';
 import 'models/product.dart';
 import 'models/purchase.dart';
@@ -45,7 +47,8 @@ class MyApp extends StatelessWidget {
         '/add_raw_material': (context) => const AddRawMaterialScreen(),
         '/sale_list': (context) => const SaleListScreen(),
         '/add_sale': (context) => const AddSaleScreen(),
-
+        '/debt': (context) => const DebtListScreen(),
+        '/add_debt': (context) => const AddDebtScreen(),
         '/summary': (context) => const SummaryScreen(),
       },
     );

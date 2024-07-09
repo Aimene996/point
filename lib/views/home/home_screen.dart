@@ -75,6 +75,13 @@ class HomeScreen extends StatelessWidget {
             color: Colors.red,
             routeName: '/summary', // Future route
           ),
+          _buildCard(
+            context,
+            title: 'Debt',
+            icon: Icons.analytics,
+            color: Colors.red,
+            routeName: '/debt', // Future route
+          ),
         ],
       ),
     );
