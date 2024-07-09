@@ -30,8 +30,8 @@ class EditProductScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final productListNotifier = watch(productListProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productListNotifier = ref.read(productListProvider.notifier);
 
     // Pre-fill controllers with product data
     productionPriceController.text = product.productionPrice.toString();

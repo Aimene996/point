@@ -62,5 +62,5 @@ class Product extends HiveObject {
     this.stock12 = 0,
     this.stock24 = 0,
     this.stock36 = 0,
-  }) : id = id ?? Uuid().v4();
+  }) : id = id ?? 'box_$boxSize';
 }

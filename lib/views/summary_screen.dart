@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/product_provider.dart';
-import '../providers/purchase_provider.dart';
 import '../providers/raw_material_provider.dart';
 import '../providers/sale_provider.dart';
 import '../models/product.dart';
-import '../models/purchase.dart';
 import '../models/raw_material.dart';
 import '../models/sale.dart';
 
@@ -13,12 +11,11 @@ class SummaryScreen extends ConsumerWidget {
   const SummaryScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final products = watch(productListProvider);
-    final purchases = watch(purchaseListProvider);
-    final rawMaterials = watch(rawMaterialListProvider);
-    final sales = watch(saleListProvider);
-    final totalProfit = watch(saleListProvider.notifier).calculateProfit();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final products = ref.read(productListProvider);
+    final rawMaterials = ref.read(rawMaterialListProvider);
+    final sales = ref.read(saleListProvider);
+    final totalProfit = ref.read(saleListProvider.notifier).calculateProfit();
 
     return Scaffold(
       appBar: AppBar(
@@ -85,8 +82,7 @@ class SummaryScreen extends ConsumerWidget {
                 },
               ),
               cells: [
-                DataCell(Text(product.id
-                    .substring(0, 2))), // Display first 2 characters of ID
+                DataCell(Text(product.id)), // Display first 2 characters of ID
                 DataCell(Text(product.name)),
                 DataCell(Text(product.boxSize.toString())),
                 DataCell(
@@ -112,8 +108,8 @@ class SummaryScreen extends ConsumerWidget {
           .map(
             (rawMaterial) => DataRow(
               cells: [
-                DataCell(Text(rawMaterial.id
-                    .substring(0, 2))), // Display first 2 characters of ID
+                DataCell(
+                    Text(rawMaterial.id)), // Display first 2 characters of ID
                 DataCell(Text(rawMaterial.name)),
                 DataCell(Text(rawMaterial.unit)),
                 DataCell(
@@ -142,8 +138,7 @@ class SummaryScreen extends ConsumerWidget {
           .map(
             (sale) => DataRow(
               cells: [
-                DataCell(Text(sale.id
-                    .substring(0, 2))), // Display first 2 characters of ID
+                DataCell(Text(sale.id)), // Display first 2 characters of ID
                 DataCell(Text(sale.clientName)),
                 DataCell(Text(sale.boxKind)),
                 DataCell(Text(sale.quantity.toString())),

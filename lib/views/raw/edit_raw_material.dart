@@ -9,9 +9,9 @@ class EditRawMaterialScreen extends ConsumerWidget {
   const EditRawMaterialScreen({required this.rawMaterial, super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final rawMaterialFormNotifier = watch(rawMaterialFormProvider.notifier);
-    final rawMaterialListNotifier = watch(rawMaterialListProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final rawMaterialFormNotifier = ref.read(rawMaterialFormProvider.notifier);
+    final rawMaterialListNotifier = ref.read(rawMaterialListProvider.notifier);
 
     // Initialize the form state with the raw material details
     rawMaterialFormNotifier.setName(rawMaterial.name);
@@ -19,7 +19,7 @@ class EditRawMaterialScreen extends ConsumerWidget {
     rawMaterialFormNotifier.setTotalPrice(rawMaterial.totalPrice);
     rawMaterialFormNotifier.setTotalQuantity(rawMaterial.totalQuantity);
 
-    final rawMaterialForm = watch(rawMaterialFormProvider);
+    final rawMaterialForm = ref.read(rawMaterialFormProvider);
 
     return Scaffold(
       appBar: AppBar(

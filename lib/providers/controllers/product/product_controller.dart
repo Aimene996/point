@@ -21,4 +21,12 @@ class ProductController {
   Future<void> deleteProduct(Product product) async {
     await repository.deleteProduct(product);
   }
+
+  Future<void> increaseStock(String productId, int boxSize, int count) async {
+    await repository.increaseStock(productId, boxSize, count);
+  }
+
+  Future<void> decreaseStock(String productId, int boxSize, int count) async {
+    await repository.decreaseStock(productId, boxSize, count);
+  }
 }

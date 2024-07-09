@@ -9,9 +9,9 @@ class SaleListScreen extends ConsumerWidget {
   const SaleListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final sales = watch(saleListProvider);
-    final totalProfit = watch(saleListProvider.notifier).calculateProfit();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final sales = ref.read(saleListProvider);
+    final totalProfit = ref.read(saleListProvider.notifier).calculateProfit();
 
     return Scaffold(
       appBar: AppBar(

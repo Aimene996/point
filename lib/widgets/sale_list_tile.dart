@@ -9,8 +9,8 @@ class SaleListTile extends ConsumerWidget {
   const SaleListTile({required this.sale, super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final saleListNotifier = watch(saleListProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final saleListNotifier = ref.read(saleListProvider.notifier);
 
     return Card(
       elevation: 4,

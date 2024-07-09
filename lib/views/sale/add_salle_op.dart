@@ -9,9 +9,9 @@ class AddSaleScreen extends ConsumerWidget {
   const AddSaleScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final productList = watch(productListProvider);
-    final saleListNotifier = watch(saleListProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productList = ref.read(productListProvider);
+    final saleListNotifier = ref.read(saleListProvider.notifier);
     final TextEditingController clientNameController = TextEditingController();
     final TextEditingController salePriceController = TextEditingController();
     final TextEditingController quantityController = TextEditingController();
@@ -73,8 +73,9 @@ class AddSaleScreen extends ConsumerWidget {
                   firstDate: DateTime(2000),
                   lastDate: DateTime(2101),
                 );
-                if (pickedDate != null && pickedDate != selectedDate)
+                if (pickedDate != null && pickedDate != selectedDate) {
                   selectedDate = pickedDate;
+                }
               },
             ),
             const SizedBox(height: 20),
@@ -92,7 +93,7 @@ class AddSaleScreen extends ConsumerWidget {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.teal,
+                backgroundColor: Colors.teal,
               ),
               child: const Text('Add Sale'),
             ),

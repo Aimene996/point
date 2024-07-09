@@ -9,8 +9,8 @@ class PurchaseListTile extends ConsumerWidget {
   const PurchaseListTile({required this.purchase, super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final purchaseListNotifier = watch(purchaseListProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final purchaseListNotifier = ref.read(purchaseListProvider.notifier);
 
     return Card(
       elevation: 4,

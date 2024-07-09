@@ -10,8 +10,8 @@ class ProductListTile extends ConsumerWidget {
   const ProductListTile({required this.product, super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader ref) {
-    final productListNotifier = ref(productListProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productListNotifier = ref.read(productListProvider.notifier);
 
     return Card(
       elevation: 4,

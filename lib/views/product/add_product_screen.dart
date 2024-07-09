@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -27,8 +26,8 @@ class AddProductScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final productListNotifier = watch(productListProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productListNotifier = ref.read(productListProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(

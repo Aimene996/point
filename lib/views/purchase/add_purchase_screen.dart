@@ -10,9 +10,9 @@ class AddPurchaseScreen extends ConsumerWidget {
   const AddPurchaseScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final productList = watch(productListProvider);
-    final purchaseListNotifier = watch(purchaseListProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final productList = ref.read(productListProvider);
+    final purchaseListNotifier = ref.read(purchaseListProvider.notifier);
     final TextEditingController quantityController = TextEditingController();
     final TextEditingController priceController = TextEditingController();
     String selectedProductId = productList.isNotEmpty ? productList[0].id : '';

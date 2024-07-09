@@ -7,8 +7,8 @@ class ProductListScreen extends ConsumerWidget {
   const ProductListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final products = watch(productListProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final products = ref.read(productListProvider);
 
     return Scaffold(
       appBar: AppBar(

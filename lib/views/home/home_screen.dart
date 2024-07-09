@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,6 +7,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          await FlutterBarcodeScanner.scanBarcode(
+              "#ff6666", "Cancel", false, ScanMode.DEFAULT);
+        },
+        label: const Text('Scan'),
+        icon: const Icon(Icons.barcode_reader),
+      ),
       appBar: AppBar(
         title: const Text('Inventory Management'),
         centerTitle: true,

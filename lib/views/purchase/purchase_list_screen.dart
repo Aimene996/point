@@ -7,9 +7,10 @@ class PurchaseListScreen extends ConsumerWidget {
   const PurchaseListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final purchases = watch(purchaseListProvider);
-    final totalCost = watch(purchaseListProvider.notifier).calculateTotalCost();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final purchases = ref.read(purchaseListProvider);
+    final totalCost =
+        ref.read(purchaseListProvider.notifier).calculateTotalCost();
 
     return Scaffold(
       appBar: AppBar(

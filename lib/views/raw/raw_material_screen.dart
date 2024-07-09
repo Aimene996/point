@@ -7,10 +7,10 @@ class AddRawMaterialScreen extends ConsumerWidget {
   const AddRawMaterialScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final rawMaterialForm = watch(rawMaterialFormProvider);
-    final rawMaterialFormNotifier = watch(rawMaterialFormProvider.notifier);
-    final rawMaterialListNotifier = watch(rawMaterialListProvider.notifier);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final rawMaterialForm = ref.read(rawMaterialFormProvider);
+    final rawMaterialFormNotifier = ref.read(rawMaterialFormProvider.notifier);
+    final rawMaterialListNotifier = ref.read(rawMaterialListProvider.notifier);
 
     return Scaffold(
       appBar: AppBar(

@@ -8,8 +8,8 @@ class RawMaterialListScreen extends ConsumerWidget {
   const RawMaterialListScreen({super.key});
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
-    final rawMaterials = watch(rawMaterialListProvider);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final rawMaterials = ref.read(rawMaterialListProvider);
 
     return Scaffold(
       appBar: AppBar(
