@@ -3,13 +3,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:testpos/views/debt/add_debt_screen.dart';
 import '../../models/debt.dart';
 import '../../providers/debt_provider.dart';
+import 'update_debt_screen.dart'; // Import the update screen
 
 class DebtListScreen extends ConsumerWidget {
   const DebtListScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final debtList = ref.read(debtListProvider);
+    final debtList = ref.watch(debtListProvider);
 
     Debt? highestDebt = debtList.isNotEmpty
         ? debtList.reduce((a, b) => a.amountDebt > b.amountDebt ? a : b)
@@ -39,11 +40,16 @@ class DebtListScreen extends ConsumerWidget {
                 return ListTile(
                   title: Text(debt.clientName),
                   subtitle:
-                      Text('Amount: \$${debt.amountDebt.toStringAsFixed(2)}'),
+                      Text('Amount: ${debt.amountDebt.toStringAsFixed(2)} DZD'),
                   trailing: IconButton(
                     icon: const Icon(Icons.edit),
                     onPressed: () {
-                      // Handle debt update
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => UpdateDebtScreen(debt: debt),
+                        ),
+                      );
                     },
                   ),
                   onTap: () {
@@ -56,7 +62,7 @@ class DebtListScreen extends ConsumerWidget {
           ? Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
-                'Highest Debt: ${highestDebt.clientName} - \$${highestDebt.amountDebt.toStringAsFixed(2)}',
+                'Highest Debt: ${highestDebt.clientName} - ${highestDebt.amountDebt.toStringAsFixed(2)} DZD',
                 style:
                     const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),

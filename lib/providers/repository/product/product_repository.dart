@@ -16,7 +16,19 @@ class ProductRepository {
 
   Future<void> addProduct(Product product) async {
     try {
-      await productBox.add(product);
+      bool productExists = false;
+      for (var p in productBox.values) {
+        if (p.boxSize == product.boxSize) {
+          productExists = true;
+          p.boxCount += product.boxCount;
+          await p.save();
+          break;
+        }
+      }
+
+      if (!productExists) {
+        await productBox.add(product);
+      }
     } catch (e) {
       // Handle error
       print('Error adding product: $e');
@@ -56,21 +68,16 @@ class ProductRepository {
     try {
       final product = productBox.get(productId);
       if (product != null) {
-        switch (boxSize) {
-          case 6:
-            product.stock6 += count;
-            break;
-          case 12:
-            product.stock12 += count;
-            break;
-          case 24:
-            product.stock24 += count;
-            break;
-          case 36:
-            product.stock36 += count;
-            break;
-          default:
-            throw Exception("Invalid box size");
+        if (boxSize == 6) {
+          product.stock6 += count;
+        } else if (boxSize == 12) {
+          product.stock12 += count;
+        } else if (boxSize == 24) {
+          product.stock24 += count;
+        } else if (boxSize == 36) {
+          product.stock36 += count;
+        } else {
+          throw Exception("Invalid box size");
         }
         await product.save();
       }
@@ -84,25 +91,20 @@ class ProductRepository {
     try {
       final product = productBox.get(productId);
       if (product != null) {
-        switch (boxSize) {
-          case 6:
-            product.stock6 =
-                (product.stock6 - count).clamp(0, double.infinity).toInt();
-            break;
-          case 12:
-            product.stock12 =
-                (product.stock12 - count).clamp(0, double.infinity).toInt();
-            break;
-          case 24:
-            product.stock24 =
-                (product.stock24 - count).clamp(0, double.infinity).toInt();
-            break;
-          case 36:
-            product.stock36 =
-                (product.stock36 - count).clamp(0, double.infinity).toInt();
-            break;
-          default:
-            throw Exception("Invalid box size");
+        if (boxSize == 6) {
+          product.stock6 =
+              (product.stock6 - count).clamp(0, double.infinity).toInt();
+        } else if (boxSize == 12) {
+          product.stock12 =
+              (product.stock12 - count).clamp(0, double.infinity).toInt();
+        } else if (boxSize == 24) {
+          product.stock24 =
+              (product.stock24 - count).clamp(0, double.infinity).toInt();
+        } else if (boxSize == 36) {
+          product.stock36 =
+              (product.stock36 - count).clamp(0, double.infinity).toInt();
+        } else {
+          throw Exception("Invalid box size");
         }
         await product.save();
       }

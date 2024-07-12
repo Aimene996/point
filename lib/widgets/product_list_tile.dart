@@ -11,8 +11,6 @@ class ProductListTile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final productListNotifier = ref.read(productListProvider.notifier);
-
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
@@ -25,6 +23,14 @@ class ProductListTile extends ConsumerWidget {
                 width: 50,
                 height: 50,
                 fit: BoxFit.cover,
+                loadingBuilder: (context, child, progress) {
+                  return progress == null
+                      ? child
+                      : const CircularProgressIndicator();
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  return const Icon(Icons.image_not_supported, size: 50);
+                },
               )
             : const Icon(Icons.image_not_supported, size: 50),
         title: Text(
@@ -38,33 +44,7 @@ class ProductListTile extends ConsumerWidget {
         ),
         trailing: IconButton(
           icon: const Icon(Icons.delete, color: Colors.red),
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text('Delete Product'),
-                  content: const Text(
-                      'Are you sure you want to delete this product?'),
-                  actions: <Widget>[
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Cancel'),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        productListNotifier.deleteProduct(product);
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('Delete'),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
+          onPressed: () => _showDeleteDialog(context, ref),
         ),
         isThreeLine: true,
         onTap: () {
@@ -76,6 +56,35 @@ class ProductListTile extends ConsumerWidget {
           );
         },
       ),
+    );
+  }
+
+  void _showDeleteDialog(BuildContext context, WidgetRef ref) {
+    final productListNotifier = ref.read(productListProvider.notifier);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Delete Product'),
+          content: const Text('Are you sure you want to delete this product?'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () {
+                productListNotifier.deleteProduct(product);
+                Navigator.of(context).pop();
+              },
+              child: const Text('Delete'),
+            ),
+          ],
+        );
+      },
     );
   }
 }

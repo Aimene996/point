@@ -9,13 +9,21 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          await FlutterBarcodeScanner.scanBarcode(
+          var data = await FlutterBarcodeScanner.scanBarcode(
               "#ff6666", "Cancel", false, ScanMode.DEFAULT);
+          print(data);
         },
         label: const Text('Scan'),
-        icon: const Icon(Icons.barcode_reader),
+        icon: const Icon(Icons.qr_code_scanner),
       ),
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed("/notification");
+              },
+              icon: const Icon(Icons.notifications))
+        ],
         title: const Text('Inventory Management'),
         centerTitle: true,
         backgroundColor: Colors.teal,
@@ -78,9 +86,16 @@ class HomeScreen extends StatelessWidget {
           _buildCard(
             context,
             title: 'Debt',
-            icon: Icons.analytics,
+            icon: Icons.money_off,
             color: Colors.red,
             routeName: '/debt', // Future route
+          ),
+          _buildCard(
+            context,
+            title: 'Expenses',
+            icon: Icons.attach_money,
+            color: Colors.green,
+            routeName: '/expenses', // Expenses route
           ),
         ],
       ),

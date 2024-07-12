@@ -8,7 +8,7 @@ class AddRawMaterialScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final rawMaterialForm = ref.read(rawMaterialFormProvider);
+    final rawMaterialForm = ref.watch(rawMaterialFormProvider);
     final rawMaterialFormNotifier = ref.read(rawMaterialFormProvider.notifier);
     final rawMaterialListNotifier = ref.read(rawMaterialListProvider.notifier);
 
@@ -73,7 +73,8 @@ class AddRawMaterialScreen extends ConsumerWidget {
               keyboardType: TextInputType.number,
             ),
             const SizedBox(height: 20),
-            Text('Price Per Unit: ${rawMaterialForm.pricePerUnit}'),
+            Text(
+                'Price Per Unit: ${rawMaterialForm.pricePerUnit.toStringAsFixed(2)}'),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
@@ -82,7 +83,7 @@ class AddRawMaterialScreen extends ConsumerWidget {
                     rawMaterialForm.totalQuantity == 0.0 ||
                     rawMaterialForm.pricePerUnit == 0.0) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
+                    const SnackBar(
                         content:
                             Text('Please fill in all fields with valid data')),
                   );
